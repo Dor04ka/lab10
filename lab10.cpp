@@ -19,10 +19,10 @@ private:
 		}
 	};
 
-	// корень дерева
+	// РєРѕСЂРµРЅСЊ РґРµСЂРµРІР°
 	Node* root;
 
-	// очистка дерева
+	// РѕС‡РёСЃС‚РєР° РґРµСЂРµРІР°
 	void clean(Node *root) {
 		if (root != nullptr) {
 			root->left = nullptr;
@@ -31,7 +31,7 @@ private:
 		}
 	}
 
-	// проверка наличия значения в дереве
+	// РїСЂРѕРІРµСЂРєР° РЅР°Р»РёС‡РёСЏ Р·РЅР°С‡РµРЅРёСЏ РІ РґРµСЂРµРІРµ
 	bool inclusion(Node* root, T value) {
 		if (root == nullptr) {
 			return false;
@@ -47,7 +47,7 @@ private:
 		}
 	}
 
-	// печать дерева
+	// РїРµС‡Р°С‚СЊ РґРµСЂРµРІР°
 	void print(Node* root, size_t len) const {
 		if (root == nullptr) {
 			for (size_t i = 0; i < len; i++) {
@@ -67,24 +67,24 @@ private:
 
 public:
 
-	// конструктор по умолчанию
+	// РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 	MyBinaryTree() {
 		root = nullptr;
 	}
 
-	// конструктор с параметром
+	// РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂРѕРј
 	MyBinaryTree(T value) {
 		root = new Node(value);
 	}
 	
-	// деструктор
+	// РґРµСЃС‚СЂСѓРєС‚РѕСЂ
 	~MyBinaryTree() {
 		clean(root);
 	}
 
-	// добавление значения в дерево
+	// РґРѕР±Р°РІР»РµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РІ РґРµСЂРµРІРѕ
 	void push(T value) {
-		// если такой элемент уже есть
+		// РµСЃР»Рё С‚Р°РєРѕР№ СЌР»РµРјРµРЅС‚ СѓР¶Рµ РµСЃС‚СЊ
 		if (inclusion(root, value) == true) {
 			return;
 		}
@@ -92,10 +92,10 @@ public:
 			root = new Node(value);
 		}
 		else {
-			// делаем копию, чтобы не менять основной root
+			// РґРµР»Р°РµРј РєРѕРїРёСЋ, С‡С‚РѕР±С‹ РЅРµ РјРµРЅСЏС‚СЊ РѕСЃРЅРѕРІРЅРѕР№ root
 			Node* newRoot = root;
 			while (true) {
-				// если меньше -> идем влево
+				// РµСЃР»Рё РјРµРЅСЊС€Рµ -> РёРґРµРј РІР»РµРІРѕ
 				if (value < newRoot->value) {
 					if (newRoot->left == nullptr) {
 						newRoot->left = new Node(value);
@@ -105,7 +105,7 @@ public:
 						newRoot = newRoot->left;
 					}
 				}
-				// если больше -> тдем вправо
+				// РµСЃР»Рё Р±РѕР»СЊС€Рµ -> С‚РґРµРј РІРїСЂР°РІРѕ
 				else if (value > newRoot->value) {
 					if (newRoot->right == nullptr) {
 						newRoot->right = new Node(value);
@@ -120,7 +120,7 @@ public:
 		}
 	}
 
-	// перегрузка <<
+	// РїРµСЂРµРіСЂСѓР·РєР° <<
 	friend ostream& operator << (ostream& os, const MyBinaryTree& tree) {
 		tree.print(tree.root, 0);
 		return os;
@@ -132,54 +132,54 @@ int main() {
 
 	setlocale(LC_ALL, "ru");
 
-	// Дерево с элементами типа int
+	// Р”РµСЂРµРІРѕ СЃ СЌР»РµРјРµРЅС‚Р°РјРё С‚РёРїР° int
 	{
-		cout << "Дерево №1. Тип данных int" << endl;
+		cout << "Р”РµСЂРµРІРѕ в„–1. РўРёРї РґР°РЅРЅС‹С… int" << endl;
 		MyBinaryTree<int> tree1;
-		cout << "Сколько элементов будет в дереве? ";
+		cout << "РЎРєРѕР»СЊРєРѕ СЌР»РµРјРµРЅС‚РѕРІ Р±СѓРґРµС‚ РІ РґРµСЂРµРІРµ? ";
 		size_t size1;
 		cin >> size1;
 		for (size_t i = 0; i < size1; i++) {
-			cout << "Введите элемент под номером " << i + 1 << ": ";
+			cout << "Р’РІРµРґРёС‚Рµ СЌР»РµРјРµРЅС‚ РїРѕРґ РЅРѕРјРµСЂРѕРј " << i + 1 << ": ";
 			int value;
 			cin >> value;
 			tree1.push(value);
 		}
-		cout << "Ваше дерево №1:" << endl;
+		cout << "Р’Р°С€Рµ РґРµСЂРµРІРѕ в„–1:" << endl;
 		cout << tree1 << endl << endl << endl;
 	}
 
-	// Дерево с элементами типа double
+	// Р”РµСЂРµРІРѕ СЃ СЌР»РµРјРµРЅС‚Р°РјРё С‚РёРїР° double
 	{
-		cout << "Дерево №2. Тип данных double" << endl;
+		cout << "Р”РµСЂРµРІРѕ в„–2. РўРёРї РґР°РЅРЅС‹С… double" << endl;
 		MyBinaryTree<double> tree2;
-		cout << "Сколько элементов будет в дереве? ";
+		cout << "РЎРєРѕР»СЊРєРѕ СЌР»РµРјРµРЅС‚РѕРІ Р±СѓРґРµС‚ РІ РґРµСЂРµРІРµ? ";
 		size_t size2;
 		cin >> size2;
 		for (size_t i = 0; i < size2; i++) {
-			cout << "Введите элемент под номером " << i + 1 << ": ";
+			cout << "Р’РІРµРґРёС‚Рµ СЌР»РµРјРµРЅС‚ РїРѕРґ РЅРѕРјРµСЂРѕРј " << i + 1 << ": ";
 			double value;
 			cin >> value;
 			tree2.push(value);
 		}
-		cout << "Ваше дерево №2:" << endl;
+		cout << "Р’Р°С€Рµ РґРµСЂРµРІРѕ в„–2:" << endl;
 		cout << tree2 << endl << endl << endl;
 	}
 
-	// Дерево с элементами типа string
+	// Р”РµСЂРµРІРѕ СЃ СЌР»РµРјРµРЅС‚Р°РјРё С‚РёРїР° string
 	{
-		cout << "Дерево №3. Тип данных string" << endl;
+		cout << "Р”РµСЂРµРІРѕ в„–3. РўРёРї РґР°РЅРЅС‹С… string" << endl;
 		MyBinaryTree<string> tree3;
-		cout << "Сколько элементов будет в дереве? ";
+		cout << "РЎРєРѕР»СЊРєРѕ СЌР»РµРјРµРЅС‚РѕРІ Р±СѓРґРµС‚ РІ РґРµСЂРµРІРµ? ";
 		size_t size3;
 		cin >> size3;
 		for (size_t i = 0; i < size3; i++) {
-			cout << "Введите элемент под номером " << i + 1 << ": ";
+			cout << "Р’РІРµРґРёС‚Рµ СЌР»РµРјРµРЅС‚ РїРѕРґ РЅРѕРјРµСЂРѕРј " << i + 1 << ": ";
 			string value;
 			cin >> value;
 			tree3.push(value);
 		}
-		cout << "Ваше дерево №3:" << endl;
+		cout << "Р’Р°С€Рµ РґРµСЂРµРІРѕ в„–3:" << endl;
 		cout << tree3 << endl << endl << endl;
 	}
 
